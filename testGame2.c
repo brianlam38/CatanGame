@@ -62,13 +62,7 @@ EXTRA INFO
 // island, paths cannot include edges which are in the sea.
 
 CONTENTS OF A VERTEX MAY INCLUDE:
-#define VACANT_VERTEX 0  
-#define CAMPUS_A 1
-#define CAMPUS_B 2
-#define CAMPUS_C 3
-#define GO8_A 4
-#define GO8_B 5
-#define GO8_C 6
+
 
 
 
