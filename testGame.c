@@ -1,3 +1,18 @@
+/*
+INSTRUCTIONS
+(1) Write a few tests on the initial game state including at least one test for:
+(2) Write a few tests to demonstrate how you might test throwDice and makeAction.
+	
+Game is a TYPE. Variable = g
+path is "probably" a TYPE. Variable = pathToVertex
+
+FUNCTION DECLARATIONS
+int getCampus(Game g, path pathToVertex); // return the contents of the given vertex (ie campus code or // VACANT_VERTEX) 
+int getARC (Game g, path pathToEdge); // the contents of the given edge (ie ARC code or vacent ARC)
+int getDiscipline (Game g, int regionID);
+int getDiceValue (Game g, int regionID);
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -7,12 +22,6 @@
 
 #define PATH_LIMIT 150
 
-/* Function declarations
-int getCampus(Game g, path pathToVertex); // return the contents of the given vertex (ie campus code or // VACANT_VERTEX) 
-int getARC (Game g, path pathToEdge); // the contents of the given edge (ie ARC code or vacent ARC)
-int getDiscipline (Game g, int regionID);
-int getDiceValue (Game g, int regionID);
-*/
 
 void getCampus (void); 
 
@@ -33,10 +42,17 @@ void getCampus (void) {
 
 }
 
-// Game is a TYPE. Variable = g
-// path is "probably" a TYPE. Variable = pathToVertex
-// (1) Write a few tests on the initial game state including at least one test for:
-// (2) Write a few tests to demonstrate how you might test throwDice and makeAction.
+void getARC (void) {
+
+}
+
+void getDiscipline (void) {
+
+}
+
+void getDiceValue (void) {
+
+}
 
 
 
