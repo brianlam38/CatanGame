@@ -1,10 +1,13 @@
+/*
 Structs
 
 - Structs are used when you need more than one piece of data to describe one thing.
 - Arrays can only store one data type inside of it.
+*/
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 
 // dog struct #1
 typedef struct dog {
@@ -72,11 +75,23 @@ void getDogsFavs(dog theDog) {
 
 /* EXAMPLE: HOW TO CHANGE INFORMATION */
 
-void setDogWeight(dog theDog, int newWeight) {	// variable newWeight = new info
-	theDog.avgWeightLbs = newWeight;
+void main () {
 
-	printf ("The weight was changed to %d\n\n", theDog.newWeight);
+	dog benji = {"Benji", "Silky Terrier", 25, 9, {"Meat", "Joe Camp"}};
+
+	setDogWeightPtr(&benji, 11);
+	printf ("The weight in Main() %d\n\n", benji.avgWeightLbs);
+	assert (theDog->newWeight == 11);
 }
+
+
+void setDogWeightPtr(dog *theDog, int newWeight) {	// variable newWeight = new info
+	theDog->avgWeightLbs = newWeight;
+
+	printf ("The weight was changed to %d\n\n", theDog->newWeight);
+	assert (theDog->newWeight == 11);
+}
+
 
 
 
