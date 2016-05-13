@@ -75,9 +75,10 @@ Game newGame (int discipline[], int dice[]) {           // BRIAN
 }
 
 void disposeGame (Game g) {	    // BRIAN
+    assert (g != NULL);         // Checks that game data exists
     free (g);                   // Free created game memory                                      
 
-    free (g.diceValue);   
+    free (g.diceValue);         // Free game data
     free (g.discipline);
     free (g.currentTurn);
     free (g.whoseTurn;
@@ -85,36 +86,17 @@ void disposeGame (Game g) {	    // BRIAN
     free (g.mostArcs);
     free (g.mostPubs);
 
-    free (player.students); 
+    free (player.students);     // Free player resources data
     free (player.KPI);
     free (player.campuses);
     free (player.GO8);
     free (player.IPs);
     free (player.publications);
 
-    free (edge.edgeID);         // Free edge struct data   
-    free (vertex.vertexID);     // Free vertex struct data
+    free (edge.edgeID);         // Free edgeID data
+    free (vertex.vertexID);     // Free vertexID data
 
-typedef struct _player {
-    int students[13]
-    int KPI;
-    int arcs;
-    int campuses;
-    int GO8;
-    int IPs;
-    int publications;
-} player;
-
-/* GAME DATA */
-typedef struct _game {
-    int diceValue;
-    int discipline;
-    int currentTurn;
-    int whoseTurn;
-    int player;
-    int mostArcs;
-    int mostPubs;
-} game;
+    g = NULL;                   // Sets game data to null
 }
 
 void makeAction (Game g, action a);						            // MEHRI
