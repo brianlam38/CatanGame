@@ -9,7 +9,7 @@ typedef struct _player {
     int KPI;
     int arcs;
     int campuses;
-    int G08;
+    int GO8;
     int IPs;
     int publications;
 } player;
@@ -44,11 +44,11 @@ typedef struct _action {
    int disciplineTo;        // used for the retrain students action
 } action;
 
-/* INSERT STATIC FUNCTIONS */
-static int disposeGameData () {
+/* DECLARE STATIC FUNCTIONS - Functions unique to this game */
+static void disposeGameData (Game g) {      // EXAMPLE Free game struct data
 }
 
-static int disposePlayerData () {
+static void disposePlayerData (player) {     // EXAMPLE Free player struct data
 }
 						
 
@@ -76,15 +76,45 @@ Game newGame (int discipline[], int dice[]) {           // BRIAN
 
 void disposeGame (Game g) {	    // BRIAN
     free (g);                   // Free created game memory                                      
-    free (g.diceValue);         // Free game struct data
+
+    free (g.diceValue);   
     free (g.discipline);
     free (g.currentTurn);
     free (g.whoseTurn;
     free (g.player);
-    free (g.mostArcs)
-    free (player.)              // Free player struct data
-    free (edge.edgeID);         
-    free (vertex.vertexID);
+    free (g.mostArcs);
+    free (g.mostPubs);
+
+    free (player.students); 
+    free (player.KPI);
+    free (player.campuses);
+    free (player.GO8);
+    free (player.IPs);
+    free (player.publications);
+
+    free (edge.edgeID);         // Free edge struct data   
+    free (vertex.vertexID);     // Free vertex struct data
+
+typedef struct _player {
+    int students[13]
+    int KPI;
+    int arcs;
+    int campuses;
+    int GO8;
+    int IPs;
+    int publications;
+} player;
+
+/* GAME DATA */
+typedef struct _game {
+    int diceValue;
+    int discipline;
+    int currentTurn;
+    int whoseTurn;
+    int player;
+    int mostArcs;
+    int mostPubs;
+} game;
 }
 
 void makeAction (Game g, action a);						            // MEHRI
