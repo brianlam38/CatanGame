@@ -3,16 +3,38 @@
 #include <assert.h>
 #include "game.h"
 
-/* PLAYER RESOURCES DATA */
-typedef struct _player {
-    int students[13]
-    int KPI;
-    int arcs;
-    int campuses;
-    int GO8;
-    int IPs;
-    int publications;
-} player;
+// user defined
+#define NUM_DISCIPLINES  6
+#define NUM_ARCS        72
+#define NUM_VERTICES    54
+
+/* game.h defines - take out later */
+#define NUM_UNIS 3
+
+// player ID of each university
+#define NO_ONE 0
+#define UNI_A  1
+#define UNI_B  2
+#define UNI_C  3
+
+// disciplines
+#define STUDENT_THD 0
+#define STUDENT_BPS 1
+#define STUDENT_BQN 2
+#define STUDENT_MJ  3
+#define STUDENT_MTV 4
+#define STUDENT_MMONEY 5
+
+/* uni RESOURCES DATA - Each index represents a data value for each uni */
+typedef struct _uni {
+    int students[NUM_UNIS * NUM_DISCIPLINES];   // 0 to 15 index
+    int KPI[NUM_UNIS];                          // 0 to 2 index
+    int arcs[NUM_UNIS]; 
+    int campuses[NUM_UNIS]; 
+    int GO8[NUM_UNIS];
+    int IPs[NUM_UNIS];  
+    int publications[NUM_UNIS];
+} uni;
 
 /* GAME DATA */
 typedef struct _game {
@@ -20,19 +42,21 @@ typedef struct _game {
     int discipline;
     int currentTurn;
     int whoseTurn;
-   	int player;
+   	uni *resources;
     int mostArcs;
     int mostPubs;
+    edge *edgeData;
+    vertex *vertexData;
 } game;
 
 /* EDGE DATA - PATHING STRUCT 1 */
 typedef struct _edge {                  // Not sure how to represent this yet
-    int edgeID
+    int edgeID[NUM_ARCS]
 } edge;
 
 /* VERTEX DATA - PATHING STRUCT 2 */
 typedef struct _vertex {
-    int vertexID                        // An array of VERTEX IDs (representing each vertex on the board)
+    int vertexID[NUM_VERTICES]                        // An array of VERTEX IDs (representing each vertex on the board)
 } vertex;
 
 /* ACTIONS DATA */
@@ -48,7 +72,7 @@ typedef struct _action {
 static void disposeGameData (Game g) {      // EXAMPLE Free game struct data
 }
 
-static void disposePlayerData (player) {     // EXAMPLE Free player struct data
+static void disposePlayerData (uni player) {     // EXAMPLE Free player struct data
 }
 						
 
@@ -56,18 +80,22 @@ static void disposePlayerData (player) {     // EXAMPLE Free player struct data
 Game newGame (int discipline[], int dice[]) {           // BRIAN
     Game g = malloc (sizeof (game))                     // Setting memory for game
     g.currentTurn = -1;                                 // Initialise game
-    g.discipline = malloc (sizeof (int) * NUM_REGIONS); // Setting memory for game board disciplines
-    g.diceValue = malloc (sizeof (int) * NUM_REGIONS)); // Setting memory for dice rolls
+    g.discipline = malloc (sizeof (int) * NUM_REGIONS); // Set memory for game board disciplines
+    g.diceValue = malloc (sizeof (int) * NUM_REGIONS)); // Set memory for dice rolls
 
     int i = 0;
-    while (i < NUM_REGIONS) {                           // Setting struct data = interface inputs    
+    while (i < NUM_REGIONS) {                           // Matching struct data with interface inputs    
         g.discipline[i] = discipline[i];
         g.diceValue[i] = dice[i];
         i++;
     }
 
-    /* Insert code for edge data (set aside memory) */
-    /* Insert code for vertex data (set aside memory) */
+    g->resources = malloc (sizeof (uni));            // Set memory for player resources struct
+
+    g->edgeData = malloc (sizeof (edge));               // Set memory for edge data
+    g->vertexData = malloc (sizeof (vertex));           // Set memory for vertex data
+
+
     /* Insert code for starting player campuses */
     /* Insert code for starting player's surrounding discipline types??? */
 
@@ -75,26 +103,21 @@ Game newGame (int discipline[], int dice[]) {           // BRIAN
 }
 
 void disposeGame (Game g) {	    // BRIAN
-    assert (g != NULL);         // Checks that game data exists
-    free (g);                   // Free created game memory                                      
+    assert (g != NULL);         // Checks that game data exists                                    
 
-    free (g.diceValue);         // Free game data
+    free (g.diceValue);         // Free each allocation of game data
     free (g.discipline);
     free (g.currentTurn);
     free (g.whoseTurn;
-    free (g.player);
     free (g.mostArcs);
     free (g.mostPubs);
-
-    free (player.students);     // Free player resources data
-    free (player.KPI);
-    free (player.campuses);
-    free (player.GO8);
-    free (player.IPs);
-    free (player.publications);
+    //free (g.uni)              // Free player data - MAY NOT NEED
 
     free (edge.edgeID);         // Free edgeID data
     free (vertex.vertexID);     // Free vertexID data
+
+    free (g);                   // Free created game memory last so 
+                                // there are no memory leakages
 
     g = NULL;                   // Sets game data to null
 }
@@ -141,6 +164,7 @@ int getMostPublications (Game g) {							         // DONE (SHARON)
    }
    return mostPubs;
 }
+
 int getTurnNumber (Game g) {								         // DONE (SHARON)
    return g->currentTurn;
 }
@@ -148,8 +172,9 @@ int getTurnNumber (Game g) {								         // DONE (SHARON)
 int getWhoseTurn (Game g) {									         // DONE (SHARON)
    return g->whoseTurn;
 }
+
 int getCampus(Game g, path pathToVertex) {				        	 // DONE (BRIAN)
-	int vertexElement = 0;
+	int vertexElement = 0;                                           // NEEDS CHANGES TO REFLECT NEW MAP STRUCTURE
 	int returnValue = 0;
 
 	vertexElement = getVertexArrayFunction(v);
@@ -175,13 +200,23 @@ int getKPIpoints (Game g, int player);					            	// MEHRI
 
 int getARCs (Game g, int player);						               	// VEN
 
-int getGO8s (Game g, int player);						               	// BRIAN
+int getGO8s (Game g, int player) {						               	// BRIAN
+    int numGO8 = 0;
+    int i = 0;
+
+    while (i < NUM_VERTICES) {
+        player.GO8[player] = returnValue;
+    }
+    i++;
+    return returnValue;
+}
+
 
 int getCampuses (Game g, int player);					            	// BRIAN
-	int counter = 0;
+	int i = 0;
 	int numCampus = 0;
 
-	while (counter < NUM_VERTICES) {
+	while (i < NUM_VERTICES) {
 		;
 	}
 	counter++;
@@ -189,11 +224,13 @@ int getCampuses (Game g, int player);					            	// BRIAN
 }
 
 int getIPs (Game g, int player) {							            // DONE
-    return g.player[player].IPs
+    return g.uni[player].IPs
 }
 
 
 int getPublications (Game g, int player);				             	// DONE
+    int i = 0
+    int 
 
 int getStudents (Game g, int player, int discipline);	    	        // DAVID
 
