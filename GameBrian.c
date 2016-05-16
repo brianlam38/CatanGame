@@ -11,12 +11,6 @@
 #include "Game.h"
 
 int main(int argc, char *argv[]){
-  
-  
-  
-  
-
-
 }*/
 
 #include <stdio.h>
@@ -160,10 +154,7 @@ static void disposePlayerData (player player) {     // EXAMPLE Free player struc
 }
 
 static int addEdge (int fromVertex, int toVertex, int leftEdge, int rightEdge, int backEdge) {
-}
-
-static int
-        
+}     
 
 /* SETTERS - Functions which change the game */
 Game newGame (int discipline[], int dice[]) {           // BRIAN
@@ -190,62 +181,62 @@ Game newGame (int discipline[], int dice[]) {           // BRIAN
     /* Insert code for starting player's surrounding discipline types??? */
   
      //initialise the game board with invalids also
-   i=0;
-   int z=0;
-   regions r;
-   r.a=INVALID;
-   r.b=INVALID;
-   r.c=INVALID;
-   while (i<=5){ //this initialises on the y axis traverse rather then x, should be fine though
-      while (z<=10){
-         g->regionarray[i][z]=r;
-         if ((z+i>=2)&&(z+i<=13)){ //corners of the array that should be invalid add to these numbers
+    i=0;
+    int z=0;
+    regions r;
+    r.a=INVALID;
+    r.b=INVALID;
+    r.c=INVALID;
+    while (i<=5) { //this initialises on the y axis traverse rather then x, should be fine though
+        while (z<=10){
+            g->regionarray[i][z]=r;
+        if ((z+i>=2) && (z+i<=13)) { //corners of the array that should be invalid add to these numbers
             g->arcarray[i][z]=VACANT_ARC;
             g->campusarray[i][z]=VACANT_VERTEX;
-         } else { //doesn't catch all the invalids, rest hardcoded
+        } else { //doesn't catch all the invalids, rest hardcoded
             g->arcarray[i][z]=INVALID;
             g->campusarray[i][z]=INVALID;
-         }
-         z++;
-      }
-      i++;
-      z=0;
-   }
+        }
+        z++;
+        }
+    i++;
+    z=0;
+    }
 
-   //need to intialise hardcoded array
-   r.c=0;
-   g->regionarray[0][2]=r;
-   g->regionarray[0][3]=r;
+    //intialising hardcoded array
+    r.c=0;
+    g->regionarray[0][2]=r;
+    g->regionarray[0][3]=r;
 
-   r.a=0;
-   r.b=1;
-   r.c=INVALID;
-   g->regionarray[0][4]=r;
-   g->regionarray[0][5]=r;
+    r.a=0;
+    r.b=1;
+    r.c=INVALID;
+    g->regionarray[0][4]=r;
+    g->regionarray[0][5]=r;
 
-   r.a=1;
-   r.b=2;
-   r.c=INVALID;
-   g->regionarray[0][6]=r;
-   g->regionarray[0][7]=r;
+    r.a=1;
+    r.b=2;
+    r.c=INVALID;
+    g->regionarray[0][6]=r;
+    g->regionarray[0][7]=r;
 
-   r.a=INVALID;
-   g->regionarray[0][8]=r;
+    r.a=INVALID;
+    g->regionarray[0][8]=r;
 
-   r.b=3;
-   g->regionarray[1][1]=r;
+    r.b=3;
+    g->regionarray[1][1]=r;
 
-   r.a=0;
-   g->regionarray[1][2]=r;
+    r.a=0;
+    g->regionarray[1][2]=r;
 
-   r.c=4;
-   g->regionarray[1][3]=r;
+    r.c=4;
+    g->regionarray[1][3]=r;
 
-   r.b=1;
-   g->regionarray[1][4]=r;
+    r.b=1;
+    g->regionarray[1][4]=r;
 
-   r.a=5;
-   g->regionarray[1][5]=r;
+    r.a=5;
+    g->regionarray[1][5]=r;
 
    r.c=2;
    g->regionarray[1][6]=r;
@@ -467,94 +458,97 @@ void disposeGame (Game g) {     // BRIAN
 }
 
 coords translatepath(path arc){
-   //needs a response for if the path is empty
-   int prevycoords=0;
-   coords coord;
-   int prevxcoords=2;
-   int xcoords=2;
-   int ycoords=0;
-   int leftx=0;
-   int lefty=0;
-   int rightx=0;
-   int righty=0;
-   int tempx=0;
-   int tempy=0;
-   int approach=DOWN;
-   int index=0;
-   while(arc[index]!=0){
-      //determine approach
-      //There is never a possibility of changing both x and y, therefore it isn't accounted for (yeah it should error trap but its our own function)
-      if (prevycoords<ycoords||((ycoords==0)&&(index==0))){
-         approach=DOWN;
-      } else if (prevycoords>ycoords){
-         approach=UP;
-      } else if (prevxcoords<xcoords){
-         approach=RIGHT;
-      } else if (prevxcoords>xcoords){
-         approach=LEFT;
-      }
+    //needs a response for if the path is empty
+    int prevycoords=0;
+    coords coord;
+    int prevxcoords=2;
+    int xcoords=2;
+    int ycoords=0;
+    int leftx=0;
+    int lefty=0;
+    int rightx=0;
+    int righty=0;
+    int tempx=0;
+    int tempy=0;
+    int approach=DOWN;
+    int index=0;
+    while(arc[index]!=0){
+        //determine approach
+        //There is never a possibility of changing both x and y, therefore it isn't accounted for (yeah it should error trap but its our own function)
+        if (prevycoords<ycoords||((ycoords==0)&&(index==0))){
+            approach=DOWN;
+        } else if (prevycoords>ycoords){
+            approach=UP;
+        } else if (prevxcoords<xcoords){
+            approach=RIGHT;
+        } else if (prevxcoords>xcoords){
+            approach=LEFT;
+        }
       //Compressed code, uncompressed found in other file
-      if (((approach==DOWN)&&((xcoords==0)||(xcoords%2==0))&&(ycoords%2==0))||((approach==DOWN)&&(xcoords%2==1)&&(ycoords%2!=0))){ //EVENS EVENS and ODDS ODDS
-         leftx=xcoords+1;
-         lefty=ycoords;
-         rightx=xcoords;
-         righty=ycoords+1;
-      } else if (((approach==UP)&&((xcoords==0)||(xcoords%2==0))&&(ycoords%2==0))||((approach==UP)&&(xcoords%2==1)&&(ycoords%2!=0))){
-         leftx=xcoords;
-         lefty=ycoords-1;
-         rightx=xcoords+1;
-         righty=ycoords;
-      } else if (((approach==RIGHT)&&((xcoords==0)||(xcoords%2==0))&&(ycoords%2==0))||((approach==RIGHT)&&(xcoords%2==1)&&(ycoords%2!=0))){
-         leftx=xcoords;
-         lefty=ycoords-1;
-         rightx=xcoords;
-         righty=ycoords+1;
-      } else if ((approach==RIGHT)&&(xcoords%2==1)&&(ycoords%2!=0)){
-         //avoiding combining the invalid statements as they are so damn long
-         leftx=xcoords; //if this happens it should be picked up by the islegalfunction
-         lefty=ycoords-1;
-         rightx=xcoords;
-         righty=ycoords+1;
-      } else if (((approach==DOWN)&&((xcoords==0)||(xcoords%2==0))&&(ycoords%2!=0))||((approach==DOWN)&&(xcoords%2==1)&&(ycoords%2==0))){ //EVENS ODDS
-         leftx=xcoords;
-         lefty=ycoords+1;
-         rightx=xcoords-1;
-         righty=ycoords;
-      } else if (((approach==UP)&&((xcoords==0)||(xcoords%2==0))&&(ycoords%2!=0))||((approach==UP)&&(xcoords%2==1)&&(ycoords%2==0))){
-         leftx=xcoords-1;
-         lefty=ycoords;
-         rightx=xcoords;
-         righty=ycoords-1;
-      } else if (((approach==RIGHT)&&((xcoords==0)||(xcoords%2==0))&&(ycoords%2!=0))||((approach==RIGHT)&&(xcoords%2==1)&&(ycoords%2==0))){
+        if (((approach == DOWN) && ((xcoords == 0) || (xcoords%2==0)) && (ycoords%2 == 0))
+            || ((approach == DOWN) && (xcoords%2 == 1) && (ycoords%2 != 0))) { //EVENS EVENS and ODDS ODDS
+            leftx=xcoords+1;
+            lefty=ycoords;
+            rightx=xcoords;
+            righty=ycoords+1;
+        } else if (((approach == UP) && ((xcoords == 0) || (xcoords%2 == 0)) && (ycoords%2 == 0))
+                   || ((approach == UP) && (xcoords%2 == 1) && (ycoords%2 != 0))) {
+            leftx=xcoords;
+            lefty=ycoords-1;
+            rightx=xcoords+1;
+            righty=ycoords;
+        } else if (((approach == RIGHT) && ((xcoords == 0) || (xcoords%2 == 0)) && (ycoords%2 == 0))
+                   || ((approach == RIGHT) && (xcoords%2 == 1) && (ycoords%2 != 0))) {
+            leftx=xcoords;
+            lefty=ycoords-1;
+            rightx=xcoords;
+            righty=ycoords+1;
+        } else if ((approach == RIGHT) && (xcoords%2 == 1) && (ycoords%2 != 0)) {
+            //avoiding combining the invalid statements as they are so damn long
+            leftx=xcoords; //if this happens it should be picked up by the islegalfunction
+            lefty=ycoords-1;
+            rightx=xcoords;
+            righty=ycoords+1;
+        } else if (((approach == DOWN) && ((xcoords == 0) || (xcoords%2 == 0)) && (ycoords%2 != 0)) || ((approach == DOWN) && (xcoords%2 == 1) && (ycoords%2 == 0))) { //EVENS ODDS
+            leftx=xcoords;
+            lefty=ycoords+1;
+            rightx=xcoords-1;
+            righty=ycoords;
+        } else if (((approach == UP) && ((xcoords == 0) || (xcoords%2 == 0)) && (ycoords%2 != 0)) || ((approach == UP) && (xcoords%2 == 1) && (ycoords%2 == 0))) {
+            eftx=xcoords-1;
+            lefty=ycoords;
+            rightx=xcoords;
+            righty=ycoords-1;
+        } else if (((approach == RIGHT) && ((xcoords == 0) || (xcoords%2 == 0)) && (ycoords%2 != 0)) || ((approach == RIGHT) && (xcoords%2 == 1) && (ycoords%2 == 0))) {
          //not possible DOUBLE CHECK
-         leftx=xcoords;
-         lefty=ycoords-1;
-         rightx=xcoords;
-         righty=ycoords+1;
-      } else if (((approach==LEFT)&&((xcoords==0)||(xcoords%2==0))&&(ycoords%2!=0))||((approach==LEFT)&&(xcoords%2==1)&&(ycoords%2==0))){
-         leftx=xcoords;
-         lefty=ycoords-1;
-         rightx=xcoords;
-         righty=ycoords+1;
-      } else if (((approach==LEFT)&&((xcoords==0)||(xcoords%2==0))&&(ycoords%2==0))||((approach==LEFT)&&(xcoords%2==1)&&(ycoords%2!=0))){
-         leftx=xcoords;
-         lefty=ycoords+1;
-         rightx=xcoords;
-         righty=ycoords-1;
-      }
+            leftx=xcoords;
+            lefty=ycoords-1;
+            rightx=xcoords;
+            righty=ycoords+1;
+        } else if (((approach == LEFT) && ((xcoords == 0) || (xcoords%2 == 0)) && (ycoords%2 != 0)) || ((approach == LEFT) && (xcoords%2 == 1) && (ycoords%2 == 0))) {
+            leftx=xcoords;
+            lefty=ycoords-1;
+            rightx=xcoords;
+            righty=ycoords+1;
+        } else if (((approach == LEFT) && ((xcoords == 0) || (xcoords%2 == 0)) && (ycoords%2 == 0)) || ((approach == LEFT) && (xcoords%2 == 1) && (ycoords%2 != 0))) {
+            leftx=xcoords;
+            lefty=ycoords+1;
+            rightx=xcoords;
+            righty=ycoords-1;
+        }
 
       //assuming new coords have been obtained
-      if (arc[index]=='L'){
+      if (arc[index]=='L') {
          prevxcoords=xcoords;
          prevycoords=ycoords;
          xcoords=leftx;
          ycoords=lefty;
-      } else if (arc[index]=='R'){
+      } else if (arc[index]=='R') {
          prevxcoords=xcoords;
          prevycoords=ycoords;
          xcoords=rightx;
          ycoords=righty;
-      } else if (arc[index]=='B'){
+      } else if (arc[index]=='B') {
          tempx=xcoords;
          tempy=ycoords;
          xcoords=prevxcoords;
@@ -569,8 +563,7 @@ coords translatepath(path arc){
    coord.y=ycoords;
 
    return coord;
-}
-          
+} 
           
 void makeAction (Game g, action a);                                 // MEHRI
 
@@ -583,90 +576,87 @@ int getDiscipline (Game g, int regionID) {                          // DAVID
 
 int diceValue (Game g, int regionID) {                // SHARON
     int diceValue[19] = DEFAULT_DICE;
-     return g->diceValue;
+    return g->diceValue;
 }
 
 int getMostARCs (Game g) {  // VEN
-     int P1A = g->player1.arcs;
-     int P2A = g->player2.arcs;
-     int P3A = g->player3.arcs;
-     int curArcs = g->mostARCS;
-     int playmostarc = NO_ONE;
+    int P1A = g->player1.arcs;
+    int P2A = g->player2.arcs;
+    int P3A = g->player3.arcs;
+    int curArcs = g->mostARCS;
+    int playmostarc = NO_ONE;
      
-  if ((P1A == 0) && (P2A == 0) && (P3A == 0)){
-     playmostarc = NO_ONE;
-  }
-  if (P1A > P2A){
-    if(P2A > P3A){
-      playmostarc = UNI_A;
-    } else if (P1A == P3A) {
-      playmostarc = curArcs;
-    } else {
-      plamostarc = UNI_C;
-    } else if (P1A == P2A) {
-      playmostarc = curArcs;
-    } else if (P2A > P3A){
-      playmostarc = UNI_B;
-    } else if ( P2A == P3A) {
-      playmostarc = curArcs;
-    } else {
-      playmostarc = UNI_C;
+    if ((P1A == 0) && (P2A == 0) && (P3A == 0)){
+        playmostarc = NO_ONE;
     }
-    return playmostarc;
-    
-  }
+    if (P1A > P2A){
+        if(P2A > P3A){
+            playmostarc = UNI_A;
+        } else if (P1A == P3A) {
+            playmostarc = curArcs;
+        } else {
+            plamostarc = UNI_C;
+    } else if (P1A == P2A) {
+        playmostarc = curArcs;
+    } else if (P2A > P3A){
+        playmostarc = UNI_B;
+    } else if ( P2A == P3A) {
+        playmostarc = curArcs;
+    } else {
+        playmostarc = UNI_C;
+    }
+    return playmostarc;  
+}
 
 int getPublications (Game g, int player) {               //SHARON
-   int playerPubs = 0;
-   if (player == UNI_A) {
-      playerPubs = g->player1.Pubs;
-   } else if (player == UNI_B) {
-      playerPubs = g->player2.Pubs;
-   } else if (player == UNI_C) {
-      playerPubs = g->player3.Pubs;
-   }
-   return playerPubs;
+    int playerPubs = 0;
+    if (player == UNI_A) {
+        playerPubs = g->player1.Pubs;
+    } else if (player == UNI_B) {
+        playerPubs = g->player2.Pubs;
+    } else if (player == UNI_C) {
+        playerPubs = g->player3.Pubs;
+    }
+    return playerPubs;
 }
 
 
-int getMostPublications(Game g){                        //SHARON
-   int pub1 = g->player1.Pubs;
-   int pub2 = g->player2.Pubs;
-   int pub3 = g->player3.Pubs;
+int getMostPublications(Game g) {                        //SHARON
+    int pub1 = g->player1.Pubs;
+    int pub2 = g->player2.Pubs;
+    int pub3 = g->player3.Pubs;
 
-   int currentMostPubs = g->mostPubs;
-   int mostPubs = NO_ONE;
+    int currentMostPubs = g->mostPubs;
+    int mostPubs = NO_ONE;
 
-   if ((pub1 == 0)&&(pub2 == 0)&&(pub3 == 0)){
-      mostPubs = NO_ONE;
-   }
+    if ((pub1 == 0)&&(pub2 == 0)&&(pub3 == 0)) {
+        mostPubs = NO_ONE;
+    }
 
-   if ((pub1) > (pub2)) {
-   //if player1Pubs > player2Pubs
-      if((pub1) > (pub3)){     //and player1Pubs > player3Pubs as well
-         mostPubs = UNI_A;
-      }else if((pub1) == (pub3)){
-         mostPubs = currentMostPubs;
-      }else{
-         mostPubs = UNI_C;
-      }
-   //or if player2Pubs >= player1Pubs
-   } else if(pub1 == pub2) {
-      mostPubs = currentMostPubs;
-   } else if((pub2) > (pub3)) {
-      mostPubs = UNI_B;
-   } else if((pub2) == (pub3)) {
-      mostPubs = currentMostPubs;
-   } else {
-      mostPubs = UNI_C;
-   }
-   return mostPubs;
+    if ((pub1) > (pub2)) {
+    //if player1Pubs > player2Pubs
+        if ((pub1) > (pub3)) {     //and player1Pubs > player3Pubs as well
+            mostPubs = UNI_A;
+        } else if ((pub1) == (pub3)) {
+            mostPubs = currentMostPubs;
+        } else {
+        mostPubs = UNI_C;
+    } else if (pub1 == pub2) {          //or if player2Pubs >= player1Pubs
+        mostPubs = currentMostPubs;
+    } else if ((pub2) > (pub3)) {
+        mostPubs = UNI_B;
+    } else if ((pub2) == (pub3)) {
+        mostPubs = currentMostPubs;
+    } else {
+        mostPubs = UNI_C;
+    }
+    return mostPubs;
 }
 
-int getTurnNumber (Game g) {    // DONE (SHARON)
-   int currentTurn = TERRA_NULLIS; //at the start of the game
-   currentTurn++;
-   return currentTurn; //g->currentTurn;
+int getTurnNumber (Game g) {
+    int currentTurn = TERRA_NULLIS; //at the start of the game
+    currentTurn++;
+    return currentTurn; //g->currentTurn;
 }
 
 int getWhoseTurn (Game g) {                                          // DONE (SHARON)// at the start of the game
@@ -688,16 +678,16 @@ int getCampus(Game g, path pathToVertex) {                           // DONE (BR
     return returnValue;
 }
 
-int getARC(Game g, path pathToEdge){
-  int playerARC = 0;
-  if (player == UNI_A){
-     playerARC = g->player1.arcs;
-  } else if {player == UNI_B){
-     playerARC = g->player2.arcs;
-  } else {player == UNI_C){
-     playerARC = g->player3.arcs;
-  }
-  return playerARC;
+int getARC(Game g, path pathToEdge) {
+    int playerARC = 0;
+    if (player == UNI_A) {
+        playerARC = g->player1.arcs;
+    } else if {player == UNI_B) {
+        playerARC = g->player2.arcs;
+    } else {player == UNI_C) {
+        playerARC = g->player3.arcs;
+    }
+    return playerARC;
 }                             
 
 int isLegalAction (Game g, action a){
@@ -735,28 +725,28 @@ int isLegalAction (Game g, action a){
                if (g->arcarray[w][y]==getWhoseTurn(g)){
                   legal=TRUE;
                }
-            } else if (((x==0)||(x==2)||(x==4))&&(y%2==0)){
+            } else if (((x==0)||(x==2)||(x==4))&&(y%2==0)) {
                w=x+1;
-               if (g->arcarray[w][y]==getWhoseTurn(g)){
+               if (g->arcarray[w][y]==getWhoseTurn(g)) {
                   legal=TRUE;
                }
-            } else if (((x==0)||(x==2)||(x==4))&&(y%2!=0)){
+            } else if (((x==0)||(x==2)||(x==4))&&(y%2!=0)) {
                w=x-1;
-               if (g->arcarray[w][y]==getWhoseTurn(g)){
+               if (g->arcarray[w][y]==getWhoseTurn(g)) {
                   legal=TRUE;
                }
             }
          }
          //also needs to check if a vacant arc first
       }
-   } else if (a.actionCode==RETRAIN_STUDENTS){
-      if ((a.disciplineFrom>=getExchangeRate(g,player,a.disciplineFrom,a.disciplineTo)) && (a.disciplineFrom!=STUDENT_THD)){ //checks not THD and above rate
-         legal=TRUE;
-      }
-   } else if (a.actionCode==PASS){
+    } else if (a.actionCode == RETRAIN_STUDENTS) {
+        if ((a.disciplineFrom >= getExchangeRate(g,player,a.disciplineFrom,a.disciplineTo)) && (a.disciplineFrom!=STUDENT_THD)) { //checks not THD and above rate
+            legal=TRUE;
+    }
+    } else if (a.actionCode==PASS){
       legal=TRUE;
    } else if (a.actionCode==START_SPINOFF){
-      if((getStudents(g,player,STUDENT_MJ)>=1)&&(getStudents(g,player,STUDENT_MTV)>=1)&&(getStudents(g,player,STUDENT_MMONEY)>=1)){
+      if ((getStudents (g,player,STUDENT_MJ) >= 1) && (getStudents (g,player,STUDENT_MTV) >= 1) && (getStudents (g,player,STUDENT_MMONEY) >= 1)) {
          legal=TRUE;
       }
    } else if (a.actionCode==BUILD_CAMPUS){
@@ -811,27 +801,27 @@ int isLegalAction (Game g, action a){
 /* PLAYER INFO GETTERS - Functions which get specific player data */
 
 int getKPIpoints (Game g, int player){
-  int Kpipts = 0;
-  Kpipts = Kpipits + 10*getCampuses(g, player);
-  Kpipits = Kpipts + 20*getGO8s(g, player);
-  Kpipts = Kpipts + 2*getARCs;
-  if (getMostPublications(g) == player){
-    Kpipts = Kpipts + 10;
-  }
-  if (getMostArcs(g) == player){
-    Kpipts = Kpipts + 10;
-  }
-  int assignedplayer = getWhoseTurn(g);
-  if (assignedplayer == UNI_A){
-    *g->player1.KPI = Kpipts;
-  } else if(assignedplayer == UNI_B){
-    *g->player2.KPI = Kpipts;
-  } else (assignedplayer == UNI_C){
-    *g->player3.KPI = Kpipts;
-  }
-  return Kpipts;
-}// MEHRI
+    int Kpipts = 0;
+    Kpipts = Kpipits + 10*getCampuses(g, player);
+    Kpipits = Kpipts + 20*getGO8s(g, player);
+    Kpipts = Kpipts + 2*getARCs;
+    if (getMostPublications(g) == player) {
+        Kpipts = Kpipts + 10;
+    }
+    if (getMostArcs(g) == player){
+        Kpipts = Kpipts + 10;
+    }
 
+    int assignedplayer = getWhoseTurn(g);
+    if (assignedplayer == UNI_A){
+        *g->player1.KPI = Kpipts;
+    } else if(assignedplayer == UNI_B){
+        *g->player2.KPI = Kpipts;
+    } else (assignedplayer == UNI_C){
+        *g->player3.KPI = Kpipts;
+    }
+    return Kpipts;
+}
 
 int getGO8s (Game g, int player) {                                      // BRIAN
     int numGO8 = 0;
@@ -911,35 +901,35 @@ int getStudents (Game g, int player, int discipline){   // function which return
 }
   
 int getExchangeRate (Game g, int player,int disciplineFrom, int disciplineTo){
-  int exchangeRate=EXCHANGE_RATE;
+    int exchangeRate=EXCHANGE_RATE;
   
-  if(getCampus(g,SEA_EXCHANGE_A1)== player){
-     exchangeRate=RETRAIN_RATE;
-  }
-  if(getCampus(g,SEA_EXCHANGE_A2)== player){
-     exchangeRate=RETRAIN_RATE;
-  }   
-  if(getCampus(g,SEA_EXCHANGE_B1)==player){
-     exchangeRate=RETRAIN_RATE;
-  }
-  if(getCampus(g,SEA_EXCHANGE_B2)==player){
-     exchangeRate=RETRAIN_RATE;
-  }
-  if(getCampus(g,SEA_EXCHANGE_C1)==player){
+    if (getCampus(g,SEA_EXCHANGE_A1) == player) {
+        exchangeRate=RETRAIN_RATE;
+    }
+    if (getCampus(g,SEA_EXCHANGE_A2) == player) {
+        exchangeRate=RETRAIN_RATE;
+    }   
+    if (getCampus(g,SEA_EXCHANGE_B1) == player) {
+        exchangeRate=RETRAIN_RATE;
+    }
+    if (getCampus(g,SEA_EXCHANGE_B2) == player) {
+        exchangeRate=RETRAIN_RATE;
+    }
+    if (getCampus(g,SEA_EXCHANGE_C1)==player) {
+        exchangeRate=RETRAIN_RATE;
+    } 
+    if (getCampus(g,SEA_EXCHANGE_C2)==player){
+        exchangeRate=RETRAIN_RATE;
+    }
+    if (getCampus(g,SEA_EXCHANGE_D1)==player){
     exchangeRate=RETRAIN_RATE;
-  } 
-  if(getCampus(g,SEA_EXCHANGE_C2)==player){
-     exchangeRate=RETRAIN_RATE;
-  }
-  if(getCampus(g,SEA_EXCHANGE_D1)==player){
-     exchangeRate=RETRAIN_RATE;
-  }
-  if(getCampus(g,SEA_EXCHANGE_D2)==player){
-     exchangeRate=RETRAIN_RATE;
-  }
-  if(getCampus(g,SEA_EXCHANGE_E1)==player){
-     exchangeRate=RETRAIN_RATE;
-  }
+    }
+    if (getCampus(g,SEA_EXCHANGE_D2)==player){
+    exchangeRate=RETRAIN_RATE;
+    }
+    if (getCampus(g,SEA_EXCHANGE_E1)==player){
+    exchangeRate=RETRAIN_RATE;
+    }
   if(getCampus(g,SEA_EXCHANGE_E2)==player){
      exchangeRate=RETRAIN_RATE;
   }
