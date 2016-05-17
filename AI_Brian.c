@@ -22,33 +22,37 @@ int buildArcFunction ();
 int buildCampusFunction ();
 int buildXXX ();
 
-// AI execution
-executionFunction (Game g) {
+// AI strategy #1
+void executionFunction (Game g) {
+    
 	// build this, else pass
-  // build this, else pass
-  // build this, else pass
+    // build this, else pass
+    // build this, else pass
 }
 
-// AI build ARC
-int buildArcFunction (Game g) {
-  if ((STUDENT_BQN >= 1) && (STUDENT_BPS >= 1)) {
-    action.actionCode = OBTAIN_ARC;
-  } else {
-    action.actionCode = PASS;
-  }
-  return actionCode;
-}
-  
-// AI build CAMPUS
-int buildCampusFunction (Game g) {
-  if ((STUDENT_BQN >= 1) && (STUDENT_BPS >= 1) && ((STUDENT_MJ >= 1) && (STUDENT_MTV >= 1)) {
-    action.actionCode = BUILD_CAMPUS;
-  } else {
-    action.actionCode = PASS;
-  }
-  return actionCode;
+// AI checks resources, builds ARC
+int buildArc (Game g) {
+    action a;
+    if (getStudents (g, getWhoseTurn (g), ((STUDENT_BQN >= 1) && (STUDENT_BPS >= 1))) {
+        a.actionCode = OBTAIN_ARC;
+    } 
+    return a;
 }
 
-// AI isLegalFunction
-int isLegalFunction (Game g) {
+// AI checks resources, builds CAMPUS
+int buildCampus (Game g) {
+    action a;
+    if (getStudents (g, getWhoseTurn (g), ((STUDENT_BQN >= 1) && (STUDENT_BPS >= 1) && (STUDENT_MJ >= 1) && (STUDENT_MTV >= 1))) {
+        action.actionCode = BUILD_CAMPUS;s
+    }
+    return a;
+}
+
+// AI checks if action is legal or not
+int checkAction (Game g) {
+
+}
+
+
+
 
