@@ -24,16 +24,15 @@ int buildXXX ();
 
 // AI strategy #1
 void executionFunction (Game g) {
-    
 	// build this, else pass
     // build this, else pass
-    // build this, else pass
+    // build this, else pass    
 }
 
 // AI checks resources, builds ARC
 int buildArc (Game g) {
     action a;
-    if (getStudents (g, getWhoseTurn (g), ((STUDENT_BQN >= 1) && (STUDENT_BPS >= 1))) {
+    if (getStudents (g, getWhoseTurn (g), (STUDENT_BQN>= 1) && (STUDENT_BPS >= 1))) {
         a.actionCode = OBTAIN_ARC;
     } 
     return a;
