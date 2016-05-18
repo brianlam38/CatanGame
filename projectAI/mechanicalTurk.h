@@ -8,4 +8,6 @@
  *  
  */
 
-action decideAction (Game g);
+int checkArc (Game g);
+int checkCampus (Game g);
+int basicAI (Game g, int checkArc, int checkCampus);

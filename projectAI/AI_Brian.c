@@ -34,13 +34,13 @@
 #include "Game.h"
 #include "mechanicalTurk.h"
 
-#define TRUE 1      // exists in game.h
-#define FALSE 0     // exists in game.h
+//#define TRUE 1      // exists in game.h
+//#define FALSE 0     // exists in game.h
 
 /* function declarations */
-int checkArc (Game g);
-int checkCampus (Game g);
-int basicAI (Game g, int checkArc, int checkCampus);
+//int checkArc (Game g);
+//int checkCampus (Game g);
+//int basicAI (Game g, int checkArc, int checkCampus);
 
     
 /*  Main basicAI program */
