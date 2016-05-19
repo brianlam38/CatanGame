@@ -1,11 +1,10 @@
-/* Christopher Lam
- * Testing the following:
-NOT DONE * void makeAction (Game g, action a);
-DONE * int getMostARCs (Game g);
-FAIL DONE * int getCampus(Game g, path pathToVertex);
-DONE * int getARCs (Game g, int player);
-DONE * int getIPs (Game g, int player);
- */
+/*  BRIAN, DAVID, VENKATESH
+*
+*   TUTOR: Jordan Brown
+*   ROOM: 5pm Wednesday, KORA lab
+*   Testing game.c
+*
+*/
  
 #include <stdlib.h>
 #include <stdio.h>
