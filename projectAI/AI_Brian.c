@@ -38,47 +38,48 @@
 //#define FALSE 0     // exists in game.h
 
 /* function declarations */
-//int checkArc (Game g);
+//int checkArc(Game g);
 //int checkCampus (Game g);
 //int basicAI (Game g, int checkArc, int checkCampus);
-
     
 /*  Main basicAI program */
-int basicAI (Game g, int checkArc, int checkCampus) {
+
+
+action decideAction (Game g) {
     action a;
 
-    int numTHD = getStudents (g, getWhoseTurn (g), STUDENT_THD);
-    int numBPS = getStudents (g, getWhoseTurn (g), STUDENT_BPS);
-    int numBQN = getStudents (g, getWhoseTurn (g), STUDENT_BQN);
-    int numMJ = getStudents (g, getWhoseTurn (g), STUDENT_MJ);
-    int numMTV = getStudents (g, getWhoseTurn (g), STUDENT_MTV);
-    int numMMONEY = getStudents (g, getWhoseTurn (g), STUDENT_MMONEY);
+    //int numTHD = getStudents(g, getWhoseTurn(g), STUDENT_THD);
+    //int numBPS = getStudents(g, getWhoseTurn(g), STUDENT_BPS);
+    //int numBQN = getStudents(g, getWhoseTurn(g), STUDENT_BQN);
+    int numMJ = getStudents(g, getWhoseTurn(g), STUDENT_MJ);
+    int numMTV = getStudents(g, getWhoseTurn(g), STUDENT_MTV);
+    //int numMMONEY = getStudents(g, getWhoseTurn(g), STUDENT_MMONEY);
 
     // turn 1 strategy
     // Build two arcs first, in the direction of resource that you are missing
     // Build a campus right after the two arcs, so you can begin gathering resources that you are missing
     /* insert code for turn 1 strategy */
 
-    if ((checkArc (g) == FALSE) && (numMJ >= 1) && (numMTV >= 1)) {         // If yes independent res for CAMPUS, don't build arcs.
+    if ((checkArc(g) == FALSE) && (numMJ >= 1) && (numMTV >= 1)) {         // If yes independent res for CAMPUS, don't build arcs.
         a.actionCode = PASS;                                               
-    } else if ((checkArc (g) == TRUE) && (numMJ == 0) || (numMTV == 0)) {  // If no independent campus res, build ARC. 
+    } else if (((checkArc(g) == TRUE) && (numMJ == 0)) || (numMTV == 0)) {  // If no independent campus res, build ARC. 
         a.actionCode = OBTAIN_ARC;                                         
-    } else if (checkArc (g) == FALSE) {                                    // If no res for ARC, turn PASS.
+    } else if (checkArc(g) == FALSE) {                                    // If no res for ARC, turn PASS.
         a.actionCode = PASS;
     }
 
-    if ((checkArc (g) == TRUE) && (numMJ == 0) || (numMTV == 0) {
+    if (((checkArc(g) == TRUE) && (numMJ == 0)) || (numMTV == 0)) {
         a.actionCode = PASS;
     }
     return a;
 }
 
 /* AI checks ARC resources */
-int checkArc (Game g) {
+int checkArc(Game g) {
     int returnValue;
     // check each ARC resource
-    int numBPS = getStudents (g, getWhoseTurn (g), STUDENT_BPS);
-    int numBQN = getStudents (g, getWhoseTurn (g), STUDENT_BQN);
+    int numBPS = getStudents(g, getWhoseTurn(g), STUDENT_BPS);
+    int numBQN = getStudents(g, getWhoseTurn(g), STUDENT_BQN);
 
     if (numBQN >= 1 && numBPS >= 1) {
         returnValue = TRUE;   
@@ -92,10 +93,10 @@ int checkArc (Game g) {
 int checkCampus (Game g) {
     int returnValue;
     // check each CAMPUS resource
-    int numBPS = getStudents (g, getWhoseTurn (g), STUDENT_BPS);
-    int numBQN = getStudents (g, getWhoseTurn (g), STUDENT_BQN);
-    int numMJ = getStudents (g, getWhoseTurn (g), STUDENT_MJ);
-    int numMTV = getStudents (g, getWhoseTurn (g), STUDENT_MTV);
+    int numBPS = getStudents(g, getWhoseTurn(g), STUDENT_BPS);
+    int numBQN = getStudents(g, getWhoseTurn(g), STUDENT_BQN);
+    int numMJ = getStudents(g, getWhoseTurn(g), STUDENT_MJ);
+    int numMTV = getStudents(g, getWhoseTurn(g), STUDENT_MTV);
 
     if (numBQN >= 1 && numBPS >= 1 && numMJ >= 1 && numMTV >= 1) {
         returnValue = TRUE;    

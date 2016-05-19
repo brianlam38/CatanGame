@@ -10,4 +10,3 @@
 
 int checkArc (Game g);
 int checkCampus (Game g);
-int basicAI (Game g, int checkArc, int checkCampus);
